@@ -31,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public Result<Void> register(@RequestBody User user) {
+    public Result<String> register(@RequestBody User user) {
         try {
             userService.register(user);
             return Result.success("注册成功");

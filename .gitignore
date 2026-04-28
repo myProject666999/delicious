@@ -39,5 +39,53 @@ hs_err_pid*
 /bin/
 /target/
 
+# Backend
+*.exe
+db/*.db
+data/ad/uploads/*
+.env
+
+# Frontend
+node_modules/
+dist/
+
+# Build cache
+**/.cache/
+
+# IDEA artifacts and output dirs
+*.iml
+*.ipr
+*.iws
+.idea
+out
+test-output
+atlassian-ide-plugin.xml
+.gradletasknamecache
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+classes/
+/build
+buildSrc/build
+/spring-*/build
+/src/asciidoc/build
+target/
+.claude/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Git
+*.log
+package-lock.json
+
 
 

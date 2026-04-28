@@ -9,34 +9,38 @@
         
         <el-tabs v-model="activeTab" @tab-click="handleTabClick">
           <el-tab-pane label="用户登录" name="user">
-            <el-form ref="userForm" :model="userForm" :rules="loginRules" label-width="0">
-              <el-form-item prop="username">
-                <el-input v-model="userForm.username" placeholder="请输入用户名" prefix-icon="el-icon-user">
-                </el-input>
-              </el-form-item>
-              <el-form-item prop="password">
-                <el-input v-model="userForm.password" type="password" placeholder="请输入密码" prefix-icon="el-icon-lock" @keyup.enter.native="handleUserLogin">
-                </el-input>
-              </el-form-item>
-              <el-form-item>
+            <el-form ref="userForm" :model="userForm" :rules="loginRules" label-width="0" class="login-form">
+              <div class="form-content">
+                <el-form-item prop="username">
+                  <el-input v-model="userForm.username" placeholder="请输入用户名" prefix-icon="el-icon-user">
+                  </el-input>
+                </el-form-item>
+                <el-form-item prop="password">
+                  <el-input v-model="userForm.password" type="password" placeholder="请输入密码" prefix-icon="el-icon-lock" @keyup.enter.native="handleUserLogin">
+                  </el-input>
+                </el-form-item>
+              </div>
+              <div class="btn-wrapper">
                 <el-button type="primary" class="login-btn" :loading="loading" @click="handleUserLogin">登录</el-button>
-              </el-form-item>
+              </div>
             </el-form>
           </el-tab-pane>
           
           <el-tab-pane label="管理员登录" name="admin">
-            <el-form ref="adminForm" :model="adminForm" :rules="loginRules" label-width="0">
-              <el-form-item prop="username">
-                <el-input v-model="adminForm.username" placeholder="请输入管理员账号" prefix-icon="el-icon-user">
-                </el-input>
-              </el-form-item>
-              <el-form-item prop="password">
-                <el-input v-model="adminForm.password" type="password" placeholder="请输入密码" prefix-icon="el-icon-lock" @keyup.enter.native="handleAdminLogin">
-                </el-input>
-              </el-form-item>
-              <el-form-item>
+            <el-form ref="adminForm" :model="adminForm" :rules="loginRules" label-width="0" class="login-form">
+              <div class="form-content">
+                <el-form-item prop="username">
+                  <el-input v-model="adminForm.username" placeholder="请输入管理员账号" prefix-icon="el-icon-user">
+                  </el-input>
+                </el-form-item>
+                <el-form-item prop="password">
+                  <el-input v-model="adminForm.password" type="password" placeholder="请输入密码" prefix-icon="el-icon-lock" @keyup.enter.native="handleAdminLogin">
+                  </el-input>
+                </el-form-item>
+              </div>
+              <div class="btn-wrapper">
                 <el-button type="primary" class="login-btn" :loading="loading" @click="handleAdminLogin">登录</el-button>
-              </el-form-item>
+              </div>
             </el-form>
           </el-tab-pane>
         </el-tabs>
@@ -144,7 +148,7 @@ export default {
   
   .login-container {
     width: 100%;
-    max-width: 420px;
+    max-width: 360px;
     padding: 20px;
   }
   
@@ -159,19 +163,19 @@ export default {
       padding: 30px 30px 10px;
       
       h1 {
-        font-size: 24px;
+        font-size: 20px;
         color: #333;
         margin-bottom: 10px;
         
         .logo-icon {
-          font-size: 28px;
-          margin-right: 8px;
+          font-size: 24px;
+          margin-right: 6px;
         }
       }
       
       p {
         color: #999;
-        font-size: 14px;
+        font-size: 13px;
       }
     }
     
@@ -183,7 +187,7 @@ export default {
       }
       
       >>> .el-tabs__item {
-        font-size: 16px;
+        font-size: 14px;
         height: 40px;
         line-height: 40px;
       }
@@ -193,16 +197,51 @@ export default {
       }
     }
     
-    .login-btn {
-      width: 100%;
-      height: 46px;
-      font-size: 16px;
-      border-radius: 23px;
-      background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-      border: none;
+    .login-form {
+      .form-content {
+        max-width: 260px;
+        margin: 0 auto;
+        
+        >>> .el-form-item {
+          margin-bottom: 18px;
+        }
+        
+        >>> .el-input {
+          >>> .el-input__inner {
+            height: 40px;
+            border-radius: 20px;
+            padding: 0 16px;
+            font-size: 14px;
+          }
+        }
+        
+        >>> .el-input-group__prepend {
+          padding: 0 12px;
+          border-radius: 20px 0 0 20px !important;
+          
+          >>> .el-input__inner {
+            border-radius: 20px 0 0 20px !important;
+          }
+        }
+      }
       
-      &:hover, &:focus {
-        background: linear-gradient(135deg, #ff5252, #ff7043);
+      .btn-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+        
+        .login-btn {
+          width: 160px;
+          height: 40px;
+          font-size: 14px;
+          border-radius: 20px;
+          background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+          border: none;
+          
+          &:hover, &:focus {
+            background: linear-gradient(135deg, #ff5252, #ff7043);
+          }
+        }
       }
     }
     
@@ -212,8 +251,8 @@ export default {
       
       p {
         color: #999;
-        font-size: 14px;
-        margin-bottom: 10px;
+        font-size: 13px;
+        margin-bottom: 6px;
         
         a {
           color: #ff6b6b;

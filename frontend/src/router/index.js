@@ -142,7 +142,40 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: () => import('@/views/profile/index.vue'),
-    meta: { title: '个人中心', requireAuth: true }
+    redirect: '/profile',
+    meta: { title: '个人中心', requireAuth: true },
+    children: [
+      {
+        path: '',
+        name: 'ProfileInfo',
+        component: () => import('@/views/profile/info.vue'),
+        meta: { title: '个人信息', requireAuth: true }
+      },
+      {
+        path: 'my-recipes',
+        name: 'MyRecipes',
+        component: () => import('@/views/profile/my-recipes.vue'),
+        meta: { title: '我的菜谱', requireAuth: true }
+      },
+      {
+        path: 'my-foods',
+        name: 'MyFoods',
+        component: () => import('@/views/profile/my-foods.vue'),
+        meta: { title: '我的美食', requireAuth: true }
+      },
+      {
+        path: 'my-posts',
+        name: 'MyPosts',
+        component: () => import('@/views/profile/my-posts.vue'),
+        meta: { title: '我的帖子', requireAuth: true }
+      },
+      {
+        path: 'settings',
+        name: 'ProfileSettings',
+        component: () => import('@/views/profile/settings.vue'),
+        meta: { title: '账号设置', requireAuth: true }
+      }
+    ]
   }
 ]
 

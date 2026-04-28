@@ -47,7 +47,7 @@ public class ForumController {
     }
 
     @PostMapping("/publish")
-    public Result<Void> publish(@RequestBody Forum forum) {
+    public Result<String> publish(@RequestBody Forum forum) {
         forumService.publish(forum);
         return Result.success("发布成功");
     }

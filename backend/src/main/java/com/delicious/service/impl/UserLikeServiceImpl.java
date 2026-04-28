@@ -1,13 +1,14 @@
 package com.delicious.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.delicious.entity.Food;
 import com.delicious.entity.Recipe;
 import com.delicious.entity.UserLike;
+import com.delicious.mapper.FoodMapper;
+import com.delicious.mapper.RecipeMapper;
 import com.delicious.mapper.UserLikeMapper;
-import com.delicious.service.FoodService;
-import com.delicious.service.RecipeService;
 import com.delicious.service.UserLikeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,10 +18,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserLikeServiceImpl extends ServiceImpl<UserLikeMapper, UserLike> implements UserLikeService {
 
     @Autowired
-    private RecipeService recipeService;
+    private RecipeMapper recipeMapper;
     
     @Autowired
-    private FoodService foodService;
+    private FoodMapper foodMapper;
 
     @Override
     public boolean isLiked(Long userId, Long targetId, String targetType) {
@@ -63,19 +64,15 @@ public class UserLikeServiceImpl extends ServiceImpl<UserLikeMapper, UserLike> i
 
     private void updateLikeCount(Long targetId, String targetType, int delta) {
         if ("recipe".equals(targetType)) {
-            Recipe recipe = recipeService.getById(targetId);
-            if (recipe != null) {
-                int newCount = (recipe.getLikeCount() == null ? 0 : recipe.getLikeCount()) + delta;
-                recipe.setLikeCount(newCount);
-                recipeService.updateById(recipe);
-            }
+            LambdaUpdateWrapper<Recipe> wrapper = new LambdaUpdateWrapper<>();
+            wrapper.eq(Recipe::getId, targetId)
+                    .setSql("like_count = ifnull(like_count, 0) + " + delta);
+            recipeMapper.update(null, wrapper);
         } else if ("food".equals(targetType)) {
-            Food food = foodService.getById(targetId);
-            if (food != null) {
-                int newCount = (food.getLikeCount() == null ? 0 : food.getLikeCount()) + delta;
-                food.setLikeCount(newCount);
-                foodService.updateById(food);
-            }
+            LambdaUpdateWrapper<Food> wrapper = new LambdaUpdateWrapper<>();
+            wrapper.eq(Food::getId, targetId)
+                    .setSql("like_count = ifnull(like_count, 0) + " + delta);
+            foodMapper.update(null, wrapper);
         }
     }
 }

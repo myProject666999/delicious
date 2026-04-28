@@ -7,28 +7,30 @@
           <p>加入我们，分享您的美食故事</p>
         </div>
         
-        <el-form ref="registerForm" :model="registerForm" :rules="registerRules" label-width="80px">
-          <el-form-item label="用户名" prop="username">
-            <el-input v-model="registerForm.username" placeholder="请输入用户名"></el-input>
-          </el-form-item>
-          <el-form-item label="密码" prop="password">
-            <el-input v-model="registerForm.password" type="password" placeholder="请输入密码"></el-input>
-          </el-form-item>
-          <el-form-item label="确认密码" prop="confirmPassword">
-            <el-input v-model="registerForm.confirmPassword" type="password" placeholder="请再次输入密码"></el-input>
-          </el-form-item>
-          <el-form-item label="昵称" prop="nickname">
-            <el-input v-model="registerForm.nickname" placeholder="请输入昵称"></el-input>
-          </el-form-item>
-          <el-form-item label="手机号" prop="phone">
-            <el-input v-model="registerForm.phone" placeholder="请输入手机号"></el-input>
-          </el-form-item>
-          <el-form-item label="邮箱" prop="email">
-            <el-input v-model="registerForm.email" placeholder="请输入邮箱"></el-input>
-          </el-form-item>
-          <el-form-item>
+        <el-form ref="registerForm" :model="registerForm" :rules="registerRules" label-width="80px" class="register-form">
+          <div class="form-content">
+            <el-form-item label="用户名" prop="username">
+              <el-input v-model="registerForm.username" placeholder="请输入用户名"></el-input>
+            </el-form-item>
+            <el-form-item label="密码" prop="password">
+              <el-input v-model="registerForm.password" type="password" placeholder="请输入密码"></el-input>
+            </el-form-item>
+            <el-form-item label="确认密码" prop="confirmPassword">
+              <el-input v-model="registerForm.confirmPassword" type="password" placeholder="请再次输入密码"></el-input>
+            </el-form-item>
+            <el-form-item label="昵称" prop="nickname">
+              <el-input v-model="registerForm.nickname" placeholder="请输入昵称"></el-input>
+            </el-form-item>
+            <el-form-item label="手机号" prop="phone">
+              <el-input v-model="registerForm.phone" placeholder="请输入手机号"></el-input>
+            </el-form-item>
+            <el-form-item label="邮箱" prop="email">
+              <el-input v-model="registerForm.email" placeholder="请输入邮箱"></el-input>
+            </el-form-item>
+          </div>
+          <div class="btn-wrapper">
             <el-button type="primary" class="register-btn" :loading="loading" @click="handleRegister">注册</el-button>
-          </el-form-item>
+          </div>
         </el-form>
         
         <div class="register-footer">
@@ -117,7 +119,7 @@ export default {
   
   .register-container {
     width: 100%;
-    max-width: 480px;
+    max-width: 400px;
     padding: 20px;
   }
   
@@ -129,50 +131,82 @@ export default {
     
     .register-header {
       text-align: center;
-      padding: 30px 30px 10px;
+      padding: 25px 30px 10px;
       
       h1 {
-        font-size: 24px;
+        font-size: 20px;
         color: #333;
         margin-bottom: 10px;
         
         .logo-icon {
-          font-size: 28px;
-          margin-right: 8px;
+          font-size: 24px;
+          margin-right: 6px;
         }
       }
       
       p {
         color: #999;
-        font-size: 14px;
+        font-size: 13px;
       }
     }
     
     >>> .el-form {
-      padding: 0 30px 20px;
+      padding: 0 30px 15px;
     }
     
-    .register-btn {
-      width: 100%;
-      height: 46px;
-      font-size: 16px;
-      border-radius: 23px;
-      background: linear-gradient(135deg, #ff6b6b, #ff8e53);
-      border: none;
+    .register-form {
+      .form-content {
+        max-width: 280px;
+        margin: 0 auto;
+        
+        >>> .el-form-item {
+          margin-bottom: 15px;
+        }
+        
+        >>> .el-form-item__label {
+          font-size: 13px;
+          color: #666;
+          line-height: 40px;
+        }
+        
+        >>> .el-input {
+          >>> .el-input__inner {
+            height: 40px;
+            border-radius: 20px;
+            padding: 0 16px;
+            font-size: 13px;
+          }
+        }
+      }
       
-      &:hover, &:focus {
-        background: linear-gradient(135deg, #ff5252, #ff7043);
+      .btn-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 5px;
+        
+        .register-btn {
+          width: 160px;
+          height: 40px;
+          font-size: 14px;
+          border-radius: 20px;
+          background: linear-gradient(135deg, #ff6b6b, #ff8e53);
+          border: none;
+          
+          &:hover, &:focus {
+            background: linear-gradient(135deg, #ff5252, #ff7043);
+          }
+        }
       }
     }
     
     .register-footer {
-      padding: 0 30px 30px;
+      padding: 0 30px 25px;
       text-align: center;
       
       p {
         color: #999;
-        font-size: 14px;
-        margin-bottom: 10px;
+        font-size: 13px;
+        margin-bottom: 6px;
         
         a {
           color: #ff6b6b;
